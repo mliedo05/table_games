@@ -1,0 +1,12 @@
+class CreateTableGames < ActiveRecord::Migration[5.2]
+  def change
+    create_table :table_games do |t|
+      t.string :name
+      t.string :rule
+      t.string :board
+      t.string :pieces
+
+      t.timestamps
+    end
+  end
+end

@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Table Games</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Rule</th>
+      <th>Board</th>
+      <th>Pieces</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @table_games.each do |table_game| %>
+      <tr>
+        <td><%= table_game.name %></td>
+        <td><%= link_to "Download rules", rails_blob_path(table_game.rule, disposition: "attachment")%></td>
+        <td><%= image_tag table_game.board.variant(resize: "100x100", colorspace:"gray") %>
+        </td>
+
+        <td>
+          <% table_game.pieces.each do |img| %>
+            <%= link_to rails_blob_path(img, disposition:'attachment') do %>
+              <%= image_tag img.variant(resize: "100x100", type: :grayscale) %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', table_game %></td>
+        <td><%= link_to 'Edit', edit_table_game_path(table_game) %></td>
+        <td><%= link_to 'Destroy', table_game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Table Game', new_table_game_path %>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<% @table_games.each do |table_game| %>
+
+<p>
+  <strong>Name:</strong>
+  <%= table_game.name %>
+</p>
+
+<div>
+  <strong>Rule:</strong>
+  <%= link_to "Download rules", rails_blob_path(table_game.rule, disposition: "attachment")%> 
+</div>
+
+<p>
+  <strong>Board:</strong>
+  <%= image_tag table_game.board.variant(resize: "100x100") %>
+</p>
+
+<p>
+  <strong>Pieces:</strong>
+    <% table_game.pieces.each do |img| %>
+      <%= link_to rails_blob_path(img, disposition:'attachment') do %>
+        <%= image_tag img.variant(resize: "100x100") %>
+      <% end %>
+    <% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_table_game_path(table_game) %> |
+<%= link_to 'Back', table_games_path %>
+
+<% end %>
